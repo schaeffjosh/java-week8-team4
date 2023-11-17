@@ -1,6 +1,7 @@
 let answer;
 let probNum = 1;
 let score = 0;
+const opArr = ["+", "-", "*", "/"];
 function getRandomNumber(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -13,16 +14,16 @@ function buildProblem(opArr) {
     displayProblem(num1, num2, selectedOperator);
     if(selectedOperator === "+") {
         answer = num1 + num2;
-        buildDisplayAnswers(num1 + num2);
+        buildDisplayAnswers(answer);
     } else if (selectedOperator === "-") {
         answer = num1 - num2;
-        buildDisplayAnswers(num1 - num2);
+        buildDisplayAnswers(answer);
     } else if (selectedOperator === "*") {
         answer = num1 * num2;
-        buildDisplayAnswers(num1 * num2);
+        buildDisplayAnswers(answer);
     } else if (selectedOperator === "/") {
         answer = num1 / num2;
-        buildDisplayAnswers(num1/num2);
+        buildDisplayAnswers(answer);
     }
 }
 
@@ -40,7 +41,8 @@ function buildDisplayAnswers(answer) {
     for(let i = 0; i < ansItems.length; i++){
         ansItems[i].innerText = ansArr[i];
         ansItems[i].addEventListener("click", (event) => {
-            selectAns(event.target.value);
+            selectAns(parseInt(event.target.value));
+            buildProblem(opArr);
         })
     }
 }
@@ -66,5 +68,5 @@ function shuffleArray(arr) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    buildProblem(["+", "-", "*", "/"]);
+    buildProblem(opArr);
 })
