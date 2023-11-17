@@ -41,22 +41,22 @@ function buildDisplayAnswers(answer) {
     for(let i = 0; i < ansItems.length; i++){
         ansItems[i].innerText = ansArr[i];
         ansItems[i].addEventListener("click", (event) => {
-            selectAns(parseInt(event.target.value));
-            buildProblem(opArr);
+            selectAns(parseInt(event.target.innerText));
         })
     }
 }
 
 function selectAns(userAnswer) {
     let currentProblem = document.querySelector(".currentProblem");
-    probNum++;
+    probNum = probNum + 1;
     currentProblem.innerText = probNum;
 
-    if(userAnswer === answer){
+    if(answer == userAnswer){
         let scoreBox = document.querySelector(".currentScore");
-        score++;
+        score = score + 1;
         scoreBox.innerText = score;
     }
+
 }
 
 /**
@@ -68,5 +68,6 @@ function shuffleArray(arr) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    buildProblem(opArr);
+    
+        buildProblem(["+", "-", "*", "/"]);
 })
