@@ -38,12 +38,15 @@ function buildDisplayAnswers(answer) {
     ansArr = shuffleArray(ansArr);
 
     const ansItems = document.querySelectorAll("li");
-    for(let i = 0; i < ansItems.length; i++){
+    for (let i = 0; i < ansItems.length; i++) {
         ansItems[i].innerText = ansArr[i];
-        ansItems[i].addEventListener("click", (event) => {
-            selectAns(parseInt(event.target.innerText));
-        })
+        ansItems[i].removeEventListener("click", gamerMan);
+        ansItems[i].addEventListener("click", gamerMan);
     }
+}
+
+function gamerMan(event) {
+    selectAns(parseInt(event.target.innerText));
 }
 
 function selectAns(userAnswer) {
@@ -51,12 +54,14 @@ function selectAns(userAnswer) {
     probNum = probNum + 1;
     currentProblem.innerText = probNum;
 
-    if(answer == userAnswer){
+    if (answer == userAnswer) {
         let scoreBox = document.querySelector(".currentScore");
         score = score + 1;
         scoreBox.innerText = score;
     }
 
+    // Move the call to buildProblem outside of the event listener
+    buildProblem(opArr);
 }
 
 /**
